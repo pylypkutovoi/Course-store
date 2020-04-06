@@ -25,7 +25,7 @@ class Course {
 
     return new Promise((resolve, reject) => {
       fs.writeFile(
-        path.join(__dirname, '..', 'data', 'MockCourses.json'),
+        path.join(__dirname, '..', 'data', 'CoursesData.json'),
         JSON.stringify(courses),
         (err) => {
           if(err) {
@@ -42,7 +42,7 @@ class Course {
   static getAll() {
     return new Promise((resolve, reject) => {
       fs.readFile(
-        path.join(__dirname, '..', 'data', 'MockCourses.json'),
+        path.join(__dirname, '..', 'data', 'CoursesData.json'),
         'utf8',
         (err, content) => {
           if (err) {
