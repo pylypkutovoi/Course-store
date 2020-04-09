@@ -13,7 +13,8 @@ router.post('/', async (req, res) => {
   const course = new Course({
     title: req.body.title,
     price: req.body.price,
-    image: req.body.image
+    image: req.body.image,
+    userId: req.user
   })
 
   try {
