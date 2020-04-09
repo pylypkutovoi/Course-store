@@ -3,6 +3,7 @@ const Course = require('../models/course');
 const router = Router();
 
 router.get('/', async (req, res) => {
+  const courses = await Course.find();
   res.render('courses.hbs', {
     title: 'Courses',
     isCourses: true,
