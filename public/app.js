@@ -54,3 +54,5 @@ const $cart = document.querySelector('#cart');
       }
     })
   }
+
+  M.Tabs.init(document.querySelectorAll('.tabs'));
