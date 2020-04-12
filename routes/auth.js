@@ -7,7 +7,9 @@ const router = Router();
 router.get('/login', async (req, res) => {
   res.render('auth/login', {
     title: 'Authorization',
-    isLogin: true
+    isLogin: true,
+    logError: req.flash('logError'),
+    regError: req.flash('regError')
   })
 })
 
@@ -34,9 +36,11 @@ router.post('/login', async (req, res) => {
         })
         res.redirect('/');
       } else {
+        req.flash('logError', 'Incorrect password');
         res.redirect('/auth/login#login');
       }
     } else {
+      req.flash('logError', 'User does not exist');
       res.redirect('/auth/login#login');
     }
   } catch (error) {
@@ -49,7 +53,8 @@ router.post('/register', async (req, res) => {
     const {email, name, password, confirm} = req.body;
     const candidate = await User.findOne({email});
     if (candidate) {
-      res.redirect('/auth/login#register')
+      req.flash('regError', 'Email already exists');
+      res.redirect('/auth/login#register');
     } else {
       const hashPassword = await bcrypt.hash(password, 10)
       const user = new User({
