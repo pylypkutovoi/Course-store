@@ -12,7 +12,6 @@ const addRoutes = require('./routes/add');
 const cartRoutes = require('./routes/cart');
 const ordersRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
-// const User = require('./models/user');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 
@@ -34,23 +33,13 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-// app.use(async (req, res, next) => {
-//   try {
-//     const user = await User.findById('5e8f614f04851f0694a9cb7a');
-//     req.user = user;
-//     next();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(session({
   secret: 'some secret',
   resave: false,
   saveUninitialized: false,
-  store //store: store
+  store
 }));
 app.use(varMiddleware);
 app.use(userMiddleware);
@@ -69,15 +58,6 @@ async function start() {
       useUnifiedTopology: true,
       useFindAndModify: false
     });
-    // const candidate = await User.findOne();
-    // if (!candidate) {
-    //   const user = new User({
-    //     email: 'adm@gmail.com',
-    //     name: 'admin',
-    //     cart: {items: []}
-    //   })
-    //   await user.save();
-    // }
   } catch (error) {
     console.log(error);
   }

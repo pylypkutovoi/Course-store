@@ -10,23 +10,56 @@ router.get('/login', async (req, res) => {
   })
 })
 
-router.post('/login', async (req, res) => {
-  const user = await User.findById('5e8f614f04851f0694a9cb7a');
-  req.session.user = user
-  req.session.isAuthenticated = true;
-  req.session.save(err => {
-    if (err) {
-      throw err
-    }
-  })
-  res.redirect('/');
-})
-
 router.get('/logout', async (req, res) => {
   req.session.destroy(() => {
     res.redirect('/auth/login#login');
   })
-  
+})
+
+router.post('/login', async (req, res) => {
+  try {
+    const {email, password } = req.body;
+    const candidate = await User.findOne({ email });
+    if (candidate) {
+      const isEqual = password === candidate.password;
+      if (isEqual) {
+        const user = candidate;
+        req.session.user = user
+        req.session.isAuthenticated = true;
+        req.session.save(err => {
+          if (err) {
+            throw err
+          }
+        })
+        res.redirect('/');
+      } else {
+        res.redirect('/auth/login#login');
+      }
+    } else {
+      res.redirect('/auth/login#login');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+router.post('/register', async (req, res) => {
+  try {
+    const {email, name, password, confirm} = req.body;
+    const candidate = await User.findOne({email});
+    if (candidate) {
+      res.redirect('/auth/login#register')
+    } else {
+      const user = new User({
+        email, name, password, cart: {items: []}
+      })
+      await user.save();
+      res.redirect('/auth/login#login')
+    }
+    
+  } catch (error) {
+    console.log(error);
+  }
 })
 
 module.exports = router;
