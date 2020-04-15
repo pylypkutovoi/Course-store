@@ -35,7 +35,7 @@
         <p class="alert">{{regError}}</p>
       {{/if}}
       <h2>Create account</h2>
-      <form action="/auth/register" method="post">
+      <form action="/auth/register" method="post" novalidate>
 
         <div class="input-field">
           <input id="remail" name="email" type="email" class="validate" required>
