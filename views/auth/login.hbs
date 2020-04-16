@@ -12,7 +12,7 @@
       <p class="alert">{{logError}}</p>
       {{/if}}
       <h2>Sign in</h2>
-      <form action="/auth/login" method="post">
+      <form action="/auth/login" method="post" novalidate>
         <div class="input-field">
           <input id="email" name="email" type="email" class="validate" required>
           <label for="email">Email Address</label>
