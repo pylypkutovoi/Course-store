@@ -16,6 +16,7 @@ const flash = require('connect-flash');
 const csrf = require('csurf');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
+const pageNotFound = require('./middleware/notFound');
 const keys = require('./keys')
 
 
@@ -56,6 +57,8 @@ app.use('/add', addRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/auth', authRoutes);
+
+app.use(pageNotFound);
 
 async function start() {
   try {
