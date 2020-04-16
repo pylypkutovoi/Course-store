@@ -49,3 +49,9 @@ exports.loginValidators = [
     .isLength({min: 6})
     .isAlphanumeric()
 ]
+
+exports.courseValidators = [
+  body('title', 'Course name must be at least 3 characters').isLength({min: 3}),
+  body('price', 'Enter correct price').isNumeric(),
+  body('image', 'Please enter a valid URL address').isURL()
+]

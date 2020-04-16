@@ -1,4 +1,7 @@
 <h1>Courses</h1>
+{{#if error}}
+<p class="alert">{{error}}</p>
+{{/if}}
 
 {{#if courses.length}}
 {{#each courses}}
