@@ -48,3 +48,8 @@
   background: rgba(255, 0, 0, .4);
   color: #ffffff
 }
+
+.avatar {
+  max-width: 300px;
+  height: auto;
+}
