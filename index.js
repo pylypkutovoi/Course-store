@@ -18,6 +18,7 @@ const csrf = require('csurf');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 const pageNotFound = require('./middleware/notFound');
+const fileMiddleware = require('./middleware/file');
 const keys = require('./keys')
 
 
@@ -47,6 +48,7 @@ app.use(session({
   saveUninitialized: false,
   store
 }));
+app.use(fileMiddleware.single('avatar'))
 app.use(csrf());
 app.use(flash());
 app.use(varMiddleware);
