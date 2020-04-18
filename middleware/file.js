@@ -5,11 +5,11 @@ const storage = multer.diskStorage({
     cb(null, 'images')
   },
   filename(req, file, cb) {
-    cb(null, new Date().toISOString() + '-' + file.originalname)
-  }
+    cb(null, new Date().toISOString().replace(/[\/\\:]/g, "_") + '-' + file.originalname)
+  } 
 });
 
-const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg']
+const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/webp']
 
 const fileFilter = (req, file, cb) => {
   if (allowedTypes.includes(file.mimetype)) {
